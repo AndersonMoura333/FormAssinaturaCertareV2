@@ -10,6 +10,8 @@ import linkSiteIcon from './assents/link-icon-2x.png'
 import telIcon from './assents/phone-icon-2x.png'
 import emailIcon from './assents/email-icon-2x.png'
 import tracoSuperior from './assents/tracoCertare.svg'
+import selogptw from './assents/selo-gptw.png'
+import selo10Anos from './assents/selo-10anos.png'
 import './styles.css';
 import { useEffect, useState } from 'react';
 
@@ -20,27 +22,27 @@ function App() {
   const [cargo, setCargo] = useState('');
   const [departamento, setDepartamento] = useState('1')
   const [logo, setLogo] = useState(certareTec)
-  const [logoStyle, setLogoStyle] = useState({classeLogo:'img-logo-certare', cor:'background-color: #367f59;', gtm:false, tec: false})
- const [links, setLinks] = useState({ site:'https://certare.com.br', facebook:'https://pt-br.facebook.com/certareengenharia'
+  const [logoStyle, setLogoStyle] = useState({classeLogo:'img-logo-certare', cor:'background-color: #367f59;', gtm:false, tec: false,certare:true})
+ const [links, setLinks] = useState({ site:'https://www.grupocertare.com/', facebook:'https://pt-br.facebook.com/certareengenharia'
                                           ,instagram:'https://www.instagram.com/certareengenharia/', linkedin:'https://www.linkedin.com/company/certareengenhariaeconsultoria' })
   useEffect(()=>{
     switch (departamento) {
       case '1':
         setLogo(certare)
-        setLogoStyle({classeLogo:'img-logo-certare', cor:'#367f59',gtm:false, tec: false})
-        setLinks({site:'https://certare.com.br', facebook:'https://pt-br.facebook.com/certareengenharia',
+        setLogoStyle({classeLogo:'img-logo-certare', cor:'#367f59',gtm:false, tec: false,certare:true})
+        setLinks({site:'https://www.grupocertare.com/', facebook:'https://pt-br.facebook.com/certareengenharia',
                   instagram:'https://www.instagram.com/certareengenharia/', linkedin:'https://www.linkedin.com/company/certareengenhariaeconsultoria' })
         console.log(logo)
         break;
         case '2':
         setLogo(certareTec)
-        setLogoStyle({classeLogo:'img-logo-certareTec', cor:'#2d695d',gtm:false, tec: true})
+        setLogoStyle({classeLogo:'img-logo-certareTec', cor:'#2d695d',gtm:false, tec: true,certare:false})
         setLinks({site:'https://certaretec.com.br', facebook:'https://www.facebook.com/Certaretec-101459775703225',
                   instagram:'https://www.instagram.com/certaretec/', linkedin:''})
         break;
         case '3':
           setLogo(gtmEngenharia)
-          setLogoStyle({classeLogo:'img-logo-certareGMT',cor:'#008ec0',gtm:true, tec: false})
+          setLogoStyle({classeLogo:'img-logo-certareGMT',cor:'#008ec0',gtm:true, tec: false,certare:false})
           setLinks({site:'https://www.gtmengenharia.com', facebook:'https://www.facebook.com/gtm.engenharia0',
                     instagram:'https://www.instagram.com/gtm.engenharia/', linkedin:'https://www.linkedin.com/company/gtm-engenharia/'})
           break;
@@ -101,24 +103,25 @@ function App() {
             </div>
            
           </div>
-          {
-            logoStyle.gtm? (
-              <div className='icons-gtm'>
-              <a className='a-icon-gtm' href={links.facebook}>
-              <img className='icon-gtm' style={{backgroundColor: logoStyle.cor}} src={iconFb}></img>
-              </a>
-              <a className='a-icon-gtm' href={links.linkedin}>
-              <img className='icon-gtm' style={{backgroundColor: logoStyle.cor}} src={iconLn}></img>
-              </a>
-              <a className='a-icon-gtm' href={links.instagram}>
-              <img className='icon-gtm' style={{backgroundColor: logoStyle.cor}} src={iconIn}></img>
-              </a>
-         
-            </div>
-            ) : (
-              <></>
-            )
-          }
+          <div className='icons-gtm'>
+            <a className='a-icon-gtm' href={links.facebook}>
+            <img className='icon-gtm' style={{backgroundColor: logoStyle.cor}} src={iconFb}></img>
+            </a>
+            {
+              logoStyle.tec? (
+                <></>
+              ):(
+
+            <a className='a-icon-gtm'href={links.linkedin}>
+            <img className='icon-gtm' style={{backgroundColor: logoStyle.cor}} src={iconLn}></img>
+            </a>
+              )
+            }
+            <a className='a-icon-gtm' href={links.instagram}>
+            <img className='icon-gtm' style={{backgroundColor: logoStyle.cor}} src={iconIn}></img>
+            </a>
+       
+          </div>
         </div>
         <div>
         <div >
@@ -130,27 +133,17 @@ function App() {
           <>
 
           <div className='div-inferior-assinatura'>
-            
-            <img className='img-logo-gpCertare' src={gpCertare}></img>
-          <div>
-            <a className='a-icon' href={links.facebook}>
-            <img className='icon' style={{backgroundColor: logoStyle.cor}} src={iconFb}></img>
-            </a>
-            {
-              logoStyle.tec? (
-                <></>
-              ):(
+            {logoStyle.certare?(
 
-            <a className='a-icon'href={links.linkedin}>
-            <img className='icon' style={{backgroundColor: logoStyle.cor}} src={iconLn}></img>
-            </a>
-              )
+            <div>
+              <img className='img-10anos' src={selo10Anos}></img>
+              <img className='img-gpwt' src={selogptw}></img>
+            </div>
+            ):
+            (<div></div>)
             }
-            <a className='a-icon' href={links.instagram}>
-            <img className='icon' style={{backgroundColor: logoStyle.cor}} src={iconIn}></img>
-            </a>
-       
-          </div>
+            <img className='img-logo-gpCertare'  src={gpCertare}></img>
+        
           </div>
           </>
         )}
